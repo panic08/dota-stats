@@ -55,6 +55,6 @@ public class DiscordSlashCommandListener extends ListenerAdapter {
 
         messageText.append("\n").append("Эти герои могут представлять значительную угрозу для **`").append(heroName).append("`**");
 
-        event.reply(messageText.toString()).queue();
+        event.reply(messageText.toString()).setEphemeral(true).queue();
     }
 }
