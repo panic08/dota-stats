@@ -32,6 +32,7 @@ public class DiscordBotInitializer {
     public void init() {
         JDA jda = JDABuilder.createDefault(token, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES)
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
+                .setActivity(Activity.watching("мету"))
                 .addEventListeners(discordCommandAutoCompleteListener)
                 .addEventListeners(discordSlashCommandListener)
                 .build();
