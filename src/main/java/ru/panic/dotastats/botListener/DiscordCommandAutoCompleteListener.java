@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.interactions.commands.Command;
 import org.springframework.stereotype.Component;
 import ru.panic.dotastats.component.Dota2HeroStorage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,14 @@ public class DiscordCommandAutoCompleteListener extends ListenerAdapter {
                         .map(name -> new Command.Choice(name, name))
                         .limit(25)
                         .collect(Collectors.toList());
+
+                event.replyChoices(options).queue();
+            }
+        } else if (event.getName().equals("meta")) {
+            if (event.getFocusedOption().getName().equals("role")) {
+                List<Command.Choice> options = new ArrayList<>(List.of("Керри", "Мидер", "Хардлейнер", "Поддержка", "Полная поддержка")).stream()
+                        .map(name -> new Command.Choice(name, name))
+                                .collect(Collectors.toList());
 
                 event.replyChoices(options).queue();
             }

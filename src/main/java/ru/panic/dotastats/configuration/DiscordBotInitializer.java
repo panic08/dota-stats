@@ -39,8 +39,10 @@ public class DiscordBotInitializer {
         CommandListUpdateAction commands = jda.updateCommands();
 
         commands.addCommands(
-                Commands.slash("counter", "Заставляет вернуть контрпики героя по заданному hero_name")
-                        .addOption(OptionType.STRING, "hero_name", "Имя героя контрпики которого требуется вернуть", true, true)
+                Commands.slash("counter", "Заставляет бота вернуть контрпики героя по заданному hero_name")
+                        .addOption(OptionType.STRING, "hero_name", "Имя героя контрпики которого требуется вернуть", true, true),
+                Commands.slash("meta", "Заставляет бота вернуть текущую мету по заданной роли")
+                        .addOption(OptionType.STRING, "role", "Роль мету которой требуется вернуть", true, true)
         ).queue();
     }
 }

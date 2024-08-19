@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Dota2HeroCounter {
+public class DotabuffHeroCounter {
     private String name;
     private double disadvantage;
     private double overOtherWinRate;
