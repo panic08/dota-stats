@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import ru.panic.dotastats.parser.domain.DotabuffHeroCounter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,7 +40,7 @@ public class DotabuffParser {
         Document dotabuffDocument = Jsoup.parse(Objects.requireNonNull(response.getBody()));
         Element matchupsTable = dotabuffDocument.getElementsByClass("sortable").first();
 
-        List<Element> heroesMatchups = matchupsTable.getElementsByTag("tbody").first()
+        Collection<Element> heroesMatchups = matchupsTable.getElementsByTag("tbody").first()
                 .getElementsByTag("tr");
 
         List<DotabuffHeroCounter> dotabuffHeroCounters = new ArrayList<>();
@@ -50,10 +51,11 @@ public class DotabuffParser {
                     List<Element> dataAttributes = heroMatchup.getElementsByAttribute("data-value");
 
                     dotabuffHeroCounters.add(DotabuffHeroCounter.builder()
-                            .name(dataAttributes.get(0).attr("data-value"))
-                            .disadvantage(Double.parseDouble(dataAttributes.get(1).attr("data-value")))
-                            .overOtherWinRate(Double.parseDouble(dataAttributes.get(2).attr("data-value")))
-                            .build());
+                                    .name(dataAttributes.get(0).attr("data-value"))
+                                    .disadvantage(Double.parseDouble(dataAttributes.get(1).attr("data-value")))
+                                    .overOtherWinRate(Double.parseDouble(dataAttributes.get(2).attr("data-value")))
+                            .build()
+                    );
                 });
 
         return dotabuffHeroCounters;

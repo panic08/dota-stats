@@ -50,7 +50,7 @@ public class DiscordSlashCommandListener extends ListenerAdapter {
             case "Полная поддержка" -> refactoredRole = "pos-5";
         }
 
-        List<DotaProTrackerMetaHero> dotaProTrackerMetaHeroes = dotaProTrackerParser.getMetaHeroes(refactoredRole, 8);
+        List<DotaProTrackerMetaHero> dotaProTrackerMetaHeroes = (List<DotaProTrackerMetaHero>) dotaProTrackerParser.getMetaHeroes(refactoredRole, 8);
 
         StringBuilder messageText = new StringBuilder("**Текущая мета для роли `" + role + "`**\n\n")
                 .append("Вот список героев, который являются метовыми для роли **`").append(role).append("`**:\n\n");

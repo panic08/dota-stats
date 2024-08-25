@@ -22,6 +22,7 @@ import ru.panic.dotastats.botListener.DiscordSlashCommandListener;
 @Configuration
 @RequiredArgsConstructor
 public class DiscordBotInitializer {
+
     @Value("${discord.bot.token}")
     private String token;
 

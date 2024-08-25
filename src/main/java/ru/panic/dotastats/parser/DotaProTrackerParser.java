@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.panic.dotastats.parser.domain.DotaProTrackerMetaHero;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
 
 @Service
@@ -23,7 +23,7 @@ public class DotaProTrackerParser {
     private final String DOTA_PRO_TRACKER_URL = "https://dota2protracker.com";
     private final String FAKE_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36";
 
-    public List<DotaProTrackerMetaHero> getMetaHeroes(String role, int limit) {
+    public Collection<DotaProTrackerMetaHero> getMetaHeroes(String role, int limit) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("User-Agent", FAKE_USER_AGENT);
         HttpEntity<String> entity = new HttpEntity<>(headers);
@@ -37,11 +37,11 @@ public class DotaProTrackerParser {
 
         Document dotaProTrackerDocument = Jsoup.parse(Objects.requireNonNull(response.getBody()));
 
-        List<Element> metaHeroElements = dotaProTrackerDocument.getElementsByClass("grid grid-cols-14 gap-1 gridS grid_ hero-row").stream()
+        Collection<Element> metaHeroElements = dotaProTrackerDocument.getElementsByClass("grid grid-cols-14 gap-1 gridS grid_ hero-row").stream()
                 .limit(limit)
                 .toList();
 
-        List<DotaProTrackerMetaHero> dotaProTrackerMetaHeroes = metaHeroElements.stream()
+        Collection<DotaProTrackerMetaHero> dotaProTrackerMetaHeroes = metaHeroElements.stream()
                         .map(e -> {
                             String name = e.getElementsByClass("flex gap-1 items-center rounded-md hover:bg-d2pt-gray-5 p-2 text-xs text-nowrap")
                                     .first().select("span")

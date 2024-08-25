@@ -7,5 +7,6 @@ import lombok.Data;
 @Builder
 public class DotaProTrackerMetaHero {
     private String name;
+
     private double winRate;
 }
